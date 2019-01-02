@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>	
+	<title>Liste contacts</title>
+</h:head>
+<h:body>
+<ui:include src="menu.xhtml" />
+<style type="text/css">
+    .ui-row-editor .ui-row-editor-pencil {
+        margin-left:8px;
+    }
+</style>
+    <h:form id="form">
+    <p:growl id="msgs" showDetail="true"/>
+	<p:dataTable id="tbl" var="contact" value="#{registerContact.ListContact()}" widgetVar="contactTable" 
+				rowKey="#{contact.nom}" selectionMode="single" editable="true" style="margin-bottom:20px">
+		<p:ajax event="rowEdit" listener="#{registerContact.onEdit}" update=":form:msgs"/>
+ 	  	<p:ajax event="rowEditCancel" listener="#{registerContact.onCancel}" update=":form:msgs" />
+	
+	<f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="PF('contactTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+            </p:outputPanel>
+        </f:facet>
+        
+    <p:column filterBy="#{contact.nom}" headerText="Nom" >
+    <p:cellEditor>
+    	<f:facet name="output"><h:outputText value="#{contact.nom}" /></f:facet>
+        <f:facet name="input"><p:inputText  value="#{contact.nom}" style="width:100%"/></f:facet>
+    </p:cellEditor>
+    </p:column>
+    <p:column filterBy="#{contact.num}" headerText="Numero" >
+    <p:cellEditor>
+    	<f:facet name="output"><h:outputText value="#{contact.num}" /></f:facet>
+        <f:facet name="input"><p:inputText  value="#{contact.num}" style="width:100%"/></f:facet>
+    </p:cellEditor>
+    </p:column>
+    <p:column headerText="Modifier" style="width:70px">
+      <p:rowEditor />
+    <h:commandLink value="Upd" action="#{registerContact.modifierContact(contact)}" />
+    </p:column>
+        <p:column headerText="Supprimer"  style="width:90px">
+    				
+    <h:commandLink value="Supprimer" action="#{registerContact.deleteAction(contact)}" />
+    				
+</p:column>
+
+</p:dataTable>
+</h:form>
+
+<script type="text/javascript">
+    //<![CDATA[
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+    //]]>
+</script>    
+ 
+ 
+<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+</p:dialog>
+<h:form>   
+    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+        <p:fileDownload value="#{fileDownloadView.file}" />
+    </p:commandButton>      
+</h:form>
+
+<h:form enctype="multipart/form-data">
+    <p:growl id="messages" showDetail="true" />
+     
+    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
+     
+    <br /> <br />
+     
+    <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.upload}" disabled="false" />
+</h:form>
+
+</h:body>
+</html>

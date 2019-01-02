@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>	
+	<title>login page</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="template/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="template/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="template/css/matrix-login.css" />
+        <link href="template/font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
+</h:head>
+<h:body>
+<div id="loginbox">  
+			<h:form styleClass="form-vertical">
+				<div class="control-group normal_text"> <h3></h3></div>
+				<div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span>
+                            <p:inputText placeholder="Entrer login ..." value="#{registerUtilisateur.utilisateur.login}"></p:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span>
+                            <p:password placeholder="Entrer password ..." value="#{registerUtilisateur.utilisateur.password}"></p:password>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <span class="center-block">
+                    	<p:commandButton value="Login" action="#{registerUtilisateur.VerifierLogin()}" styleClass="btn btn-success"></p:commandButton>
+                    </span>
+                    <span class="pull-right">
+                    	<h:commandLink value="Not a member ?" action="ajouterUtilisateur1.xhtml" ></h:commandLink>
+                    </span>
+                </div>
+                
+			</h:form>
+        </div>
+        
+        <script src="template/js/jquery.min.js"></script>  
+        <script src="template/js/matrix.login.js"></script> 
+</h:body>
+</html>

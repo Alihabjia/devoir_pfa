@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>	
+	<title>Register Utilisateur</title>
+</h:head>
+<h:body>
+<ui:include src="menu.xhtml" />
+<h:form>
+	<p:growl id="messages"></p:growl>
+	<p:panelGrid columns="2">
+		<p:outputLabel value="Entrer le nom"></p:outputLabel>
+		<p:inputText value="#{registerUtilisateur.utilisateur.nom}"></p:inputText>
+		<p:outputLabel value="Entrer le prenom"></p:outputLabel>
+		<p:inputText value="#{registerUtilisateur.utilisateur.prenom}"></p:inputText>
+		<p:outputLabel value="Entrer le login"></p:outputLabel>
+		<p:inputText value="#{registerUtilisateur.utilisateur.login}"></p:inputText>	
+		<p:outputLabel value="Entrer le password"></p:outputLabel>
+		<p:inputText value="#{registerUtilisateur.utilisateur.password}"></p:inputText>						
+	</p:panelGrid>
+	<p:commandButton value="Register" action="#{registerUtilisateur.register}" update="messages"></p:commandButton>
+</h:form>
+</h:body>
+</html>
